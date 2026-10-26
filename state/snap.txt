@@ -1,0 +1,10 @@
+firefox
+firmware-updater
+gaming-graphics-core22
+gaming-graphics-core24
+gnome-42-2204
+gnome-46-2404
+gtk-common-themes
+mesa-2404
+steam
+thunderbird

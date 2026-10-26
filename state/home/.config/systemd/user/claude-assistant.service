@@ -1,0 +1,12 @@
+[Unit]
+Description=Claude personal assistant (Remote Control in tmux, socket "claude")
+
+[Service]
+Type=forking
+ExecStart=%h/.local/bin/claude-assistant start
+ExecStop=%h/.local/bin/claude-assistant stop
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Weekly check of the machine record
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+RandomizedDelaySec=1h
+
+[Install]
+WantedBy=timers.target

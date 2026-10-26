@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=SolutiPlugin
+Exec=/home/yuji/Downloads/birdid-sign-plugin (2)
+X-GNOME-Autostart-enabled=true
+Comment=Plugin Soluti autostart

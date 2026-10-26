@@ -1,0 +1,25 @@
+[General]
+ConfigVersion=1
+
+[MainWindow]
+1920x1080 screen: Height=1002
+1920x1080 screen: Width=1920
+1920x1080 screen: Window-Maximized=true
+1920x1080 screen: XPosition=0
+1920x1080 screen: YPosition=28
+2 screens: Height=510
+2 screens: Width=911
+2 screens: XPosition=544
+2 screens: YPosition=292
+4096x2160 screen: Height=508
+4096x2160 screen: Width=911
+4096x2160 screen: XPosition=1592
+4096x2160 screen: YPosition=812
+HDMI-1-0=HDMI-1-0
+HDMI-1-0 eDP-1=eDP-1
+MenuBar=Enabled
+State[$d]
+eDP-1=eDP-1
+
+[UiSettings]
+ColorScheme=

@@ -1,0 +1,15 @@
+[$Version]
+update_info=spectacle_clipboard.upd:clipboard-settings-change,spectacle_rememberregion.upd:spectacle-migrate-rememberregion
+
+[ImageSave]
+lastImageSaveAsLocation=file:///home/yuji/Pictures/Screenshot_20260423_153804.png
+lastImageSaveLocation=file:///home/yuji/Pictures/Screenshot_20260423_153804.png
+translatedScreenshotsFolder=Screenshots
+
+[KFileDialog Settings]
+Recent Files[$e]=file:$HOME/Documents/cnh.png,file:$HOME/Pictures/Screenshot_20260423_153804.png,file:$HOME/Documents/rendimento-acoes-avenue-2025.png
+Recent URLs[$e]=file:$HOME/Documents/,file:$HOME/,file:$HOME/Pictures/
+detailViewIconSize=16
+
+[VideoSave]
+translatedScreencastsFolder=Screencasts

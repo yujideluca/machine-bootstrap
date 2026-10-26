@@ -1,0 +1,21 @@
+# systemd user unit for the wiki server. Installed by tools/install.sh into ~/.config/systemd/user/.
+# Secrets live only in ~/.config/wiki/*.env (mode 600), never in git.
+[Unit]
+Description=Wiki of Giovanni's projects (Elixir server on 127.0.0.1:4180, published by Tailscale Funnel)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=exec
+Environment=WIKI_SITE_DIR=%h/dev/wiki/site
+Environment=WIKI_PORT=4180
+Environment=RELEASE_TMP=%t/wiki
+EnvironmentFile=%h/.config/wiki/secret.env
+EnvironmentFile=%h/.config/wiki/oauth.env
+ExecStart=%h/dev/wiki/server/_build/prod/rel/wiki/bin/wiki start
+ExecStop=%h/dev/wiki/server/_build/prod/rel/wiki/bin/wiki stop
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

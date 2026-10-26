@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+build/
+*.gpg
+*.tar
+*.tar.gz
+secrets/
+.venv/

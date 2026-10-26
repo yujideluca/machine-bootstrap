@@ -1,0 +1,8 @@
+[Unit]
+Description=Check that the machine record (machine-bootstrap) is current
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/yuji/dev/machine-bootstrap
+ExecStart=/usr/bin/python3 -m mb status --notify
+SuccessExitStatus=0 1

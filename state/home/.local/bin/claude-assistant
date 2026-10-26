@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Claude personal assistant: Remote Control server in a dedicated tmux server (socket "claude").
+#   claude-assistant run     loop that keeps `claude remote-control` alive (used inside tmux)
+#   claude-assistant start   start the tmux session if it is not running (used by systemd)
+#   claude-assistant attach  open the live session (detach with Ctrl+b d)
+#   claude-assistant stop    stop the session
+#   claude-assistant window  wait for the session, then attach (used by the KDE login autostart)
+set -u
+SOCK=claude SESSION=assistant DIR="$HOME/assistant"
+export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin"
+export MEM_INSTANCE=assistant
+
+case "${1:-attach}" in
+  run)
+    cd "$DIR" || exit 1
+    while true; do
+      # At boot Wi-Fi comes up after this starts: wait for DNS instead of failing fast.
+      until getent hosts api.anthropic.com >/dev/null; do sleep 5; done
+      claude remote-control --name "$(hostname)-assistant" --permission-mode bypassPermissions
+      echo "[$(date '+%F %T')] remote-control exited ($?); restarting in 15 s. Ctrl+C to stop."
+      sleep 15
+    done ;;
+  start)
+    tmux -L "$SOCK" has-session -t "$SESSION" 2>/dev/null && exit 0
+    tmux -L "$SOCK" new-session -d -s "$SESSION" -c "$DIR" "$0 run" ;;
+  window)
+    until tmux -L "$SOCK" has-session -t "$SESSION" 2>/dev/null; do sleep 2; done
+    exec tmux -L "$SOCK" attach -t "$SESSION" ;;
+  attach) exec tmux -L "$SOCK" attach -t "$SESSION" ;;
+  stop)   tmux -L "$SOCK" kill-server 2>/dev/null; exit 0 ;;
+  *) echo "usage: claude-assistant [run|start|attach|window|stop]"; exit 2 ;;
+esac

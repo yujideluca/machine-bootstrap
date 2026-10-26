@@ -1,0 +1,149 @@
+# What machine-bootstrap may touch. Anything not listed here is never captured (MB-2).
+# Secrets never go in `capture`: the scanner refuses them, and they belong in [secrets] (encrypted).
+
+[capture]
+repos_root = "~/dev"
+max_file_bytes = 1_000_000
+skip_globs = ["*.bak", "*.bak-*", "*.bak.*", "*.pre-*", "*.mb-bak-*", "*.lock", "*.sock", "__pycache__", "*.tbcache", "*.orig"]
+home_files = [
+  ".bashrc", ".profile", ".gitconfig", "AGENTS.md", "dev/env.sh",
+  ".config/mimeapps.list", ".config/user-dirs.dirs", ".config/gh/config.yml",
+  # KDE Plasma: look, shortcuts, windows, input, panels
+  ".config/kdeglobals", ".config/kglobalshortcutsrc", ".config/kwinrc", ".config/kwinrulesrc",
+  ".config/kxkbrc", ".config/kcminputrc", ".config/kscreenlockerrc", ".config/ksmserverrc",
+  ".config/krunnerrc", ".config/plasma-org.kde.plasma.desktop-appletsrc", ".config/plasmarc",
+  ".config/plasmashellrc", ".config/plasmanotifyrc", ".config/plasmaparc", ".config/khotkeysrc",
+  ".config/ktimezonedrc", ".config/plasma-localerc", ".config/systemsettingsrc", ".config/trashrc",
+  ".config/kiorc", ".config/kded5rc", ".config/kmixrc", ".config/baloofileinformationrc",
+  ".config/konsolerc", ".config/dolphinrc", ".config/katerc", ".config/kateschemarc", ".config/kwinoutputconfig.json",
+  ".config/okularrc", ".config/okularpartrc", ".config/spectaclerc", ".config/gwenviewrc", ".config/harunarc",
+  ".config/elisarc", ".config/arkrc", ".config/powerdevilrc", ".config/powermanagementprofilesrc",
+  ".config/gtk-3.0/settings.ini", ".config/gtk-4.0/settings.ini", ".gtkrc-2.0", ".config/xsettingsd/xsettingsd.conf",
+  ".local/share/user-places.xbel",
+  # Giovanni's own scripts (not the downloaded binaries next to them)
+  ".local/bin/claude-assistant", ".local/bin/tg-send", ".local/bin/codex-pbar", ".local/bin/kotlin-lsp",
+  ".local/bin/pyright", ".local/bin/pyright-langserver",
+  # Claude Code and Codex: instructions, settings, skills, the auto-memory
+  ".claude/CLAUDE.md", ".claude/settings.json", ".codex/AGENTS.md", ".codex/config.toml",
+]
+home_dirs = [
+  ".config/autostart", ".config/systemd/user",
+  ".local/share/konsole", ".local/share/color-schemes",
+  ".claude/skills", ".claude/projects/-home-yuji/memory", ".codex/skills",
+]
+# Needed to get the same packages from third-party repositories (public keys and source lists, no secrets)
+system_files_portable = [
+  "/etc/apt/sources.list.d/google-chrome.sources", "/etc/apt/sources.list.d/chatgpt.sources",
+  "/etc/apt/sources.list.d/tailscale.list", "/etc/apt/sources.list.d/kubuntu-ppa-ubuntu-ppa-noble.sources",
+  "/usr/share/keyrings/google-chrome.gpg", "/usr/share/keyrings/tailscale-archive-keyring.gpg",
+  "/usr/share/keyrings/chatgpt-archive-keyring.gpg",
+]
+# Tied to this laptop's keyboard and Nvidia card: restored only with --profile same
+system_files_hardware = [
+  "/etc/X11/xorg.conf.d/00-keyboard.conf", "/etc/modprobe.d/nvidia-graphics-drivers-kms.conf",
+]
+
+[restore]
+# The installer of the new system owns the boot loader: installing grub-pc over grub-efi could leave the PC unbootable
+never_packages = ["grub*", "shim*", "efibootmgr", "mokutil"]
+# On a different computer (--profile new) these packages are not installed: drivers and kernels fit one machine
+hardware_packages = ["nvidia-*", "libnvidia-*", "linux-*", "*-microcode", "*firmware*", "xserver-xorg-video-*", "system76-*"]
+
+[secrets]
+# Encrypted with a passphrase only Giovanni knows. Includes the app release key: losing it ends in-place updates.
+paths = [
+  ".ssh", ".gnupg", ".config/gh/hosts.yml", ".config/rclone", ".config/telegram-bot", ".config/wiki",
+  ".claude.json", ".claude/.credentials.json", ".codex/auth.json",
+  ".android/german-quiz-release.jks", ".android/german-quiz-signing.properties",
+  ".android/adbkey", ".android/adbkey.pub", ".android/debug.keystore",
+  ".local/share/keyrings", ".local/share/kwalletd",
+]
+gdrive_path = "gdrive:machine-bootstrap"
+
+[data]
+ssd_uuid = "0a34cf43-b7a8-4198-bb85-690e4c0149c4"
+dirs = ["Documents", "Pictures", "Downloads", "Desktop", "Music", "archive", "sketchbook", "claude", "assistant", "fixes", "kde_backup", "dev/quiz-backups"]
+bulk_dirs = ["Anime", "Videos", "Games"]   # large and replaceable: only with --bulk
+
+# Recipes for software that is not an apt package. `check` exits 0 when it is already installed.
+[[recipe]]
+id = "flathub-remote"
+stage = "after-apt"
+root = true
+check = "flatpak remote-list --system | grep -q flathub"
+install = "sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+
+[[recipe]]
+id = "linger"
+root = true
+check = "loginctl show-user $USER -p Linger | grep -q yes"
+install = "sudo loginctl enable-linger $USER"
+
+[[recipe]]
+id = "uv"
+check = "uv --version"
+install = "curl -LsSf https://astral.sh/uv/install.sh | sh"
+
+[[recipe]]
+id = "rust"
+root = true
+check = "command -v cargo && command -v rustc"
+install = "sudo apt-get install -y cargo rustc"
+
+[[recipe]]
+id = "cargo-tools"
+check = "test -x $HOME/.cargo/bin/cargo-mutants && test -x $HOME/.cargo/bin/cargo-llvm-cov"
+install = "cargo install --locked cargo-mutants cargo-llvm-cov"
+
+[[recipe]]
+id = "node"
+check = "node --version"
+install = "mkdir -p $HOME/.local/opt $HOME/.local/bin && curl -fsSL https://nodejs.org/dist/v22.23.3/node-v22.23.3-linux-x64.tar.xz | tar -xJ -C $HOME/.local/opt && for b in node npm npx; do ln -sf $HOME/.local/opt/node-v22.23.3-linux-x64/bin/$b $HOME/.local/bin/$b; done"
+
+[[recipe]]
+id = "node-global-tools"
+# versions pinned to what the wiki's elm.json requires (a newer Elm refuses to build it)
+check = "test \"$(elm --version)\" = 0.19.1 && elm-format --help >/dev/null && elm-test --version"
+install = "npm config set prefix $HOME/.local && npm install -g elm@0.19.1-6 elm-format@0.8.7 elm-test@0.19.1-revision12"
+
+[[recipe]]
+id = "pyright"
+check = "test -d $HOME/.local/share/pyright-pkg"
+install = "uv pip install --python python3 --break-system-packages --target $HOME/.local/share/pyright-pkg pyright"
+
+[[recipe]]
+id = "claude-code"
+check = "claude --version"
+install = "curl -fsSL https://claude.ai/install.sh | bash"
+
+[[recipe]]
+id = "codex"
+check = "codex --version"
+install = "npm config set prefix $HOME/.local && npm install -g @openai/codex"
+
+[[recipe]]
+id = "jdk-21"
+check = "ls -d $HOME/dev/jdk-21*"
+install = "mkdir -p $HOME/dev && curl -fsSL 'https://api.adoptium.net/v3/binary/latest/21/ga/linux/x64/jdk/hotspot/normal/eclipse' | tar -xz -C $HOME/dev"
+
+[[recipe]]
+id = "gradle"
+check = "ls -d $HOME/dev/gradle-*"
+install = "cd $HOME/dev && curl -fsSLO https://services.gradle.org/distributions/gradle-9.8.1-bin.zip && unzip -q gradle-9.8.1-bin.zip && rm gradle-9.8.1-bin.zip"
+
+[[recipe]]
+id = "android-sdk"
+check = "test -x $HOME/dev/android-sdk/cmdline-tools/latest/bin/sdkmanager && test -d $HOME/dev/android-sdk/platform-tools"
+install = "export JAVA_HOME=$(ls -d $HOME/dev/jdk-21* | head -1) PATH=$(ls -d $HOME/dev/jdk-21* | head -1)/bin:$PATH; mkdir -p $HOME/dev/android-sdk/cmdline-tools && cd $HOME/dev/android-sdk/cmdline-tools && curl -fsSLo cmdtools.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip && unzip -q cmdtools.zip && mv cmdline-tools latest && rm cmdtools.zip && yes | latest/bin/sdkmanager --licenses >/dev/null; latest/bin/sdkmanager 'platform-tools' 'platforms;android-36' 'platforms;android-37.0' 'build-tools;36.0.0' 'build-tools;36.1.0'"
+
+[[recipe]]
+id = "mem-command"
+check = "test -x $HOME/.local/bin/mem"
+install = "mkdir -p $HOME/.local/bin && ln -sf $HOME/dev/workflow-memory/bin/mem $HOME/.local/bin/mem"
+
+# Builds the wiki server release and the `wiki` command (Elixir, from the apt packages). The service itself only
+# starts once the sign-in key ~/.config/wiki/oauth.env exists (restored by secrets-restore).
+[[recipe]]
+id = "wiki"
+check = "test -x $HOME/dev/wiki/server/wiki && test -x $HOME/dev/wiki/server/_build/prod/rel/wiki/bin/wiki && test -f $HOME/dev/wiki/site/index.html"
+install = "cd $HOME/dev/wiki && mix local.hex --force && mix local.rebar --force && tools/install.sh"

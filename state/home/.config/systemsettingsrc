@@ -1,0 +1,17 @@
+[MainWindow]
+1920x1080 screen: Height=700
+1920x1080 screen: Width=1209
+1920x1080 screen: XPosition=402
+1920x1080 screen: YPosition=208
+2 screens: XPosition=402
+2 screens: YPosition=208
+4096x2160 screen: Height=899
+4096x2160 screen: Width=1434
+4096x2160 screen: XPosition=1538
+4096x2160 screen: YPosition=716
+HDMI-1-0=HDMI-1-0
+HDMI-1-0 eDP-1=eDP-1
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAAAABLkAAAK8AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgAAAAAA/////wAAAAAAAAAA
+ToolBarsMovable=Disabled
+eDP-1=eDP-1

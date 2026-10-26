@@ -1,0 +1,2 @@
+#!/bin/sh
+PYTHONPATH=$HOME/.local/share/pyright-pkg exec python3 -m pyright "$@"

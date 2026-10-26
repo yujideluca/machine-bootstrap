@@ -1,0 +1,29 @@
+name: quality-gate
+
+# Runs tools/pipeline-check, which runs tools/quality_gate.sh (the same script a release runs) once, on every push and pull request.
+# Add the toolchain setup steps this project needs (setup-java, setup-node, setup-python, ...).
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/pipeline-check
+          key: pipeline-check-${{ hashFiles('pipeline-check.version') }}
+      # pipeline-check runs tools/quality_gate.sh once, then the architecture and fitness checks, and writes
+      # report.json; any `falha` fails this job. Branch protection should require the job "gate" (ADR-0003).
+      - run: tools/pipeline-check.sh --mode ci
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-report
+          path: build/pipeline-check/report.json
+          retention-days: 14

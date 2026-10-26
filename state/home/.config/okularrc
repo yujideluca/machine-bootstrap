@@ -1,0 +1,39 @@
+[Desktop Entry]
+FullScreen=false
+
+[General]
+LockSidebar=true
+ShowSidebar=false
+
+[KFileDialog Settings]
+detailViewIconSize=16
+
+[MainWindow]
+1920x1080 screen: Height=1002
+1920x1080 screen: Width=1920
+1920x1080 screen: Window-Maximized=true
+1920x1080 screen: XPosition=0
+1920x1080 screen: YPosition=28
+eDP-1=eDP-1
+
+[Recent Files]
+File1[$e]=$HOME/Downloads/ enunciado.pdf
+File10[$e]=$HOME/Documents/06 Alemão/Nutzlich/Goethe_B2_Schreiben_Korrektur.pdf
+File2[$e]=$HOME/Documents/B2-Onlineaufgabe.pdf
+File3[$e]=$HOME/Downloads/PLANO DE ORGANIZAÇÃO.md
+File4[$e]=$HOME/Downloads/PLANO DE ORGANIZAÇÃO_1.md
+File5[$e]=$HOME/Downloads/download.pdf
+File6[$e]=$HOME/Documents/06 Alemão/ enunciado.pdf
+File7[$e]=$HOME/Documents/06 Alemão/Nutzlich/forumsbeitrag_b2_banco_de_frases.pdf
+File8[$e]=$HOME/Downloads/compendio-alemao-b2-formal.md
+File9[$e]=$HOME/Documents/06 Alemão/Nutzlich/Goethe_B2_Cognatos_Schreiben.pdf
+Name1[$e]=\senunciado.pdf
+Name10[$e]=Goethe_B2_Schreiben_Korrektur.pdf
+Name2[$e]=B2-Onlineaufgabe.pdf
+Name3[$e]=PLANO DE ORGANIZAÇÃO.md
+Name4[$e]=PLANO DE ORGANIZAÇÃO_1.md
+Name5[$e]=download.pdf
+Name6[$e]=\senunciado.pdf
+Name7[$e]=forumsbeitrag_b2_banco_de_frases.pdf
+Name8[$e]=compendio-alemao-b2-formal.md
+Name9[$e]=Goethe_B2_Cognatos_Schreiben.pdf

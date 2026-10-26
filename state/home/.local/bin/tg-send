@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Send a message or file to Giovanni on Telegram. Only ever to the saved chat id.
+# Usage: tg-send "text"            tg-send -f /path/to/file ["caption"]
+set -euo pipefail
+dir="$HOME/.config/telegram-bot"
+token=$(cat "$dir/token"); chat=$(cat "$dir/chat_id")
+api="https://api.telegram.org/bot$token"
+if [ "${1:-}" = "-f" ]; then
+  file="${2:?file path required}"
+  [ -f "$file" ] || { echo "no such file: $file" >&2; exit 1; }
+  [ "$(stat -c %s "$file")" -le 52428800 ] || { echo "file over 50 MB" >&2; exit 1; }
+  out=$(curl -sS -F "chat_id=$chat" -F "document=@$file" ${3:+-F "caption=$3"} "$api/sendDocument")
+else
+  text="${1:?text required}"
+  out=$(curl -sS --data-urlencode "chat_id=$chat" --data-urlencode "text=${text:0:4096}" "$api/sendMessage")
+fi
+echo "$out" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("sent" if d.get("ok") else "FAILED: "+str(d.get("description"))); sys.exit(0 if d.get("ok") else 1)'

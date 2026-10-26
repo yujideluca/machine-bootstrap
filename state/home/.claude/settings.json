@@ -1,0 +1,106 @@
+{
+  "env": {
+    "MOBILEMCP_DISABLE_TELEMETRY": "1",
+    "ANDROID_HOME": "/home/yuji/dev/android-sdk"
+  },
+  "permissions": {},
+  "model": "sonnet",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/yuji/dev/workflow-memory/bin/mem hook-session-start",
+            "timeout": 40
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/yuji/dev/workflow-memory/bin/mem hook-prompt",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/yuji/dev/workflow-memory/bin/mem hook-stop",
+            "timeout": 40
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/yuji/.local/bin/wiki hook-stop",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "f=$HOME/.claude/tools/pbar.py; if [ -f \"$f\" ]; then exec python3 -I \"$f\" line; else echo \"progress bar missing: $f\"; fi",
+    "refreshInterval": 1
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true,
+    "kotlin-lsp@claude-plugins-official": true,
+    "session-report@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "android-test-pilot@android-test-pilot": true
+  },
+  "extraKnownMarketplaces": {
+    "android-test-pilot": {
+      "source": {
+        "source": "github",
+        "repo": "panicgit/android-test-pilot"
+      }
+    }
+  },
+  "theme": "dark",
+  "agentPushNotifEnabled": true,
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: Not queryable here (no git remotes in this repo — working directory /home/yuji has no tracked files); assume private until confirmed",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: Not queryable here (no remotes, no branch info)",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine with open internet",
+      "**Source control**: The trusted repo and its remote(s) only (no additional orgs configured)",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured — bucket config scan failed to complete, treat as unavailable not absent",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar — note: .claude/.credentials.json, llama.cpp/tools/ui/.env.example, and gradle-credentials jars/properties under dev/gradle-9.8.1/ were observed as sensitive-looking paths",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: mixed — software development (llama.cpp tooling, QuizApp) and personal/hobby system administration tasks on Giovanni's laptop",
+      "**Trusted repo**: No git repository detected at /home/yuji (the agent's working directory has no remotes and 0 tracked files); treat as untrusted until a repo is identified",
+      "**Org-specific CLIs**: None configured"
+    ]
+  }
+}

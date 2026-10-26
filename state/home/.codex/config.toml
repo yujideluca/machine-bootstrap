@@ -1,0 +1,143 @@
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
+[desktop]
+followUpQueueMode = "steer"
+external-agent-import-sync-item-types = "all"
+external-agent-import-sync-enabled = true
+conversationDetailMode = "STEPS_COMMANDS"
+ambient-suggestions-enabled = true
+
+[marketplaces.openai-bundled]
+source_type = "local"
+source = "/home/yuji/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.android-test-pilot]
+source_type = "git"
+source = "https://github.com/panicgit/android-test-pilot.git"
+
+[marketplaces.claude-plugins-official]
+source_type = "git"
+source = "https://github.com/anthropics/claude-plugins-official.git"
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."claude-code-setup@claude-plugins-official"]
+enabled = true
+
+[plugins."claude-md-management@claude-plugins-official"]
+enabled = true
+
+[plugins."feature-dev@claude-plugins-official"]
+enabled = true
+
+[plugins."kotlin-lsp@claude-plugins-official"]
+enabled = true
+
+[plugins."pr-review-toolkit@claude-plugins-official"]
+enabled = true
+
+[plugins."pyright-lsp@claude-plugins-official"]
+enabled = true
+
+[plugins."security-guidance@claude-plugins-official"]
+enabled = true
+
+[plugins."session-report@claude-plugins-official"]
+enabled = true
+
+[plugins."chrome@openai-bundled"]
+enabled = true
+
+[mcp_servers.node_repl]
+args = []
+command = "/usr/lib/chatgpt/resources/cua_node/bin/node_repl"
+env_vars = ["BROWSER_USE_ACCESS_EXECUTOR_ID", "BROWSER_USE_ACCESS_PIPE_PATH", "BROWSER_USE_ACCESS_VERIFYING_IDENTITY"]
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = "/usr/lib/chatgpt/resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/usr/lib/chatgpt/resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/home/yuji/.codex:/usr/lib/chatgpt/resources/cua_node/lib/node_modules"
+CODEX_HOME = "/home/yuji/.codex"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab,mcpapps"
+BROWSER_USE_TINYSKY_ENABLED = "1"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.1021.22027"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/home/yuji/.codex/plugins/cache/openai-bundled/browser/26.1021.22027/scripts/browser-service.mjs"}'
+CODEX_CLI_PATH = "/usr/lib/chatgpt/resources/codex"
+
+[shell_environment_policy]
+inherit = "core"
+
+[shell_environment_policy.set]
+MOBILEMCP_DISABLE_TELEMETRY = "1"
+ANDROID_HOME = "/home/yuji/dev/android-sdk"
+
+[projects."/home/yuji"]
+trust_level = "trusted"
+
+[tui]
+status_line = ["task-progress"]
+screen_reader_detection_done = true
+
+[tui.model_availability_nux]
+"gpt-6.1-sol" = 4
+
+[hooks.state]
+
+[hooks.state."/home/yuji/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:e0b0c582942aec11d7a1cec94a7fd0f2bb441f09a4eb7782b043f2ee2a389c56"
+
+[hooks.state."/home/yuji/.codex/hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:3dcfd1f83ce6393d08845f7b4213589c6222348fc1d0706eff73af1ac7f29bd9"
+
+[hooks.state."/home/yuji/.codex/hooks.json:stop:0:0"]
+trusted_hash = "sha256:e81762e1ef197d01be9cf37614a18201f1bd48a29f336c8266cbcc7f5f7c8080"
+
+[hooks.state."/home/yuji/.codex/hooks.json:stop:1:0"]
+trusted_hash = "sha256:afc7af77fabc0129357b2a0bd721d0a6f287d62e8bbc99dc67049ce9fd2937a6"
+
+[hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:0:0"]
+trusted_hash = "sha256:e1f574c07fd492df4de2ceb615c3b0a2a3eca27329bf0929ff9095650c7174bf"
+trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+
+[hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:1:0"]
+trusted_hash = "sha256:ff051adf363232a355758bbc96941b87ab8b38bd47e6c5940b1232827a68b6d6"
+trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+
+[hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:1:1"]
+trusted_hash = "sha256:ff051adf363232a355758bbc96941b87ab8b38bd47e6c5940b1232827a68b6d6"
+trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+
+[hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:1:2"]
+trusted_hash = "sha256:ff051adf363232a355758bbc96941b87ab8b38bd47e6c5940b1232827a68b6d6"
+trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+
+[hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:3def3be0b299c29f829ea4b057509c24f3c6f8eede7b8c719bbd4167866d6cf6"
+trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+
+[hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:c22701bf949e9ffd219867faec1158e0124874e94f3668dab6209fa3acc92dd6"
+trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+
+[hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:stop:0:0"]
+trusted_hash = "sha256:5d8880157e747997146b5eb0443a43909e23fb0203e64ae4895eff5a1b0282fa"
+trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+
+[notice]
+hide_rate_limit_model_nudge = true

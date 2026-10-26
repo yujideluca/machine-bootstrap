@@ -1,0 +1,27 @@
+[ExtractDialog]
+DirHistory[$e]=$HOME/Downloads/,/media/yuji/Kindle/documents/Downloads/
+
+[General]
+LockSidebar=true
+ShowSidebar=true
+
+[KFileDialog Settings]
+Recent Files[$e]=file:$HOME
+Recent URLs[$e]=file:$HOME/Downloads/,file:$HOME/
+detailViewIconSize=16
+
+[MainWindow]
+1920x1080 screen: XPosition=763
+1920x1080 screen: YPosition=281
+State=AAAA/wAAAAD9AAAAAQAAAAEAAADGAAACKvwCAAAAAfsAAAAWAGEAcgBrAF8AcwBpAGQAZQBiAGEAcgEAAAAuAAACKgAAAIkBAAACAAAC7wAAAioAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+StatusBar=Disabled
+ToolBarsMovable=Disabled
+eDP-1=eDP-1
+splitterSizes=154,77
+
+[Viewer]
+1920x1080 screen: Height=247
+1920x1080 screen: Width=232
+1920x1080 screen: XPosition=844
+1920x1080 screen: YPosition=476
+eDP-1=eDP-1

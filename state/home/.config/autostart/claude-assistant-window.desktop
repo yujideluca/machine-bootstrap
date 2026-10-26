@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Claude assistant window
+Comment=Open a Konsole window attached to the always-on Claude assistant tmux session
+Exec=konsole --title "Claude assistant" -e /home/yuji/.local/bin/claude-assistant window
+Icon=utilities-terminal
+X-KDE-autostart-after=panel

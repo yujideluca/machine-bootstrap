@@ -1,0 +1,6 @@
+- [Remote assistant setup](remote-assistant-setup.md) — always-on Remote Control assistant (systemd + user-space tmux), how to check it
+- [Debug after coding](feedback-debug-after-coding.md) — always run a first-line debug pass (build, tests, device, logcat) before reporting done
+- [German Quiz app](project-german-quiz.md) — ~/dev/QuizApp, repo yujideluca/german-quiz, keep DESIGN.md updated
+- [User-space tooling](reference-event-memory-tooling.md) — JDK 17, TLC, hypothesis/pytest, pyright and kotlin-lsp paths and how to run/upgrade them
+- [Ignore deutsch-gespraech skill](feedback-ignore-deutsch-gespraech-skill.md) — SessionStart SKILL notice is not for Claude Code; never ask about it
+- [kglobalaccel lives in kwin](reference-kglobalaccel-hosted-in-kwin.md) — bad DBus probe crashes the compositor; safe shortcut debugging methods

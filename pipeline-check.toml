@@ -1,0 +1,43 @@
+# Limits for tools/pipeline-check (ADR-0003). Changed only by Giovanni, in a commit with a decision-log row saying why.
+# Fill in every <...> for the project; delete a block that does not apply.
+projeto = "machine-bootstrap"
+aviso_a = 0.8            # a fitness function warns from 80 % of its limit and fails at 100 %
+
+[gate]
+command = "tools/quality_gate.sh"
+required = true
+
+[architecture]
+pure_dirs = []                      # source folders that must stay free of the forbidden packages, e.g. ["core/src"]
+build_files = []                    # build files that must not name them, e.g. ["core/build.gradle.kts"]
+# forbidden = ["android", "androidx"]   # default; change for another stack
+
+[[fitness]]
+id = "arquivo-maior"
+kind = "max_file_lines"
+limit = 300
+dirs = ["mb"]
+extensions = ["py"]
+
+[[fitness]]
+id = "gate-segundos"                # a slow gate gets skipped
+kind = "gate_seconds"
+limit = 1200
+
+# [github] is added when the repository exists on GitHub (it does not yet: Giovanni decides when to push)
+
+[dora]
+days = 30
+# feed_path = "~/dev/<releases repo>"   # git repo whose commit subjects are "beta X (versionCode N, sha)" / "promote ..."
+decision_log = "DESIGN.md"
+
+[pre_push]
+guard = []   # path prefixes whose change makes a push of main worth checking; [] = every push
+
+[traceability]
+[[traceability.sources]]
+dir = "tests"        # add the project's test folders; extensions without the dot
+extensions = ["py", "kt", "js", "ts", "rs"]
+
+[shellcheck]
+extra_files = ["tools/hooks/pre-push", "bootstrap.sh", "tools/vm-test.sh"]
