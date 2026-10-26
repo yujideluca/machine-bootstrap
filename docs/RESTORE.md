@@ -14,7 +14,7 @@ how the tool works. **The complete manual, with every step explained, the failur
 
 ```bash
 sudo apt-get update && sudo apt-get install -y git          # only if git is missing
-git clone https://github.com/yujideluca/machine-bootstrap     # only works once the project is pushed to GitHub and is public
+git clone https://github.com/yujideluca/machine-bootstrap     # public repository: no login needed
 # otherwise copy it from the SSD: rsync -a /run/media/$USER/<drive>/machine-bootstrap/tool/ machine-bootstrap/
 cd machine-bootstrap
 ```

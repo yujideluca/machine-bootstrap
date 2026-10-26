@@ -1,0 +1,13 @@
+[Unit]
+Description=Codex remote control in tmux
+
+[Service]
+Type=forking
+ExecStart=%h/.local/bin/codex-remote-tmux start
+ExecStop=%h/.local/bin/codex-remote-tmux stop
+Restart=always
+RestartSec=15
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=default.target

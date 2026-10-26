@@ -6,6 +6,14 @@ nothing about how this was built. Read it top to bottom once; afterwards use the
 **Short version:** `docs/RESTORE.md` is the one-page checklist. This file is the long version with the reasons,
 the exact outputs, the failure cases and the recovery plans.
 
+**Placeholders.** Anything written between `<` and `>` (for example `<newest file>`) is a placeholder: replace it, brackets
+included, with the real value. Typed literally, the shell reads `<` and `>` as redirection and fails with
+`syntax error near unexpected token`. Today's archive, ready to paste:
+
+```bash
+gpg --decrypt /run/media/yuji/0a34cf43-b7a8-4198-bb85-690e4c0149c4/machine-bootstrap/secrets/mb-secrets-20261026-081552.tar.gpg | tar -t | head
+```
+
 ## Table of contents
 
 1. [Rules for an AI assistant](#1-rules-for-an-ai-assistant-read-this-first)
@@ -84,7 +92,7 @@ If you are an AI helping with this task, these rules override your defaults.
 | **The old laptop** (Acer Nitro, Kubuntu, X11, Nvidia) | The live system and `~/dev/machine-bootstrap` | Nothing |
 | **The SSD** → `machine-bootstrap/` | `home/` (personal files), `secrets/` (encrypted archive, after the first `secrets-backup`), `versions/` (older copies of overwritten files), `tool/` (a copy of this project, see 4.7) | Plug it in. The archive needs the passphrase. |
 | **Google Drive** → `machine-bootstrap/` | A second copy of the encrypted archive only | A browser sign-in to Google. The archive needs the passphrase. |
-| **GitHub** | The other repositories (QuizApp, wiki, workflow-memory and so on). This project too, **once Giovanni pushes it** (not done as of 2026-10-25). | The SSH key (restored from the archive) for private repositories. |
+| **GitHub** | The other repositories (QuizApp, wiki, workflow-memory and so on). This project too: public repository `yujideluca/machine-bootstrap` (published 2026-10-26; main requires the CI check `gate`). | The SSH key (restored from the archive) for private repositories. |
 
 The SSD also holds Giovanni's older folders at its top level (documents, photos, Anime and others). **The tool never touches those.**
 
@@ -129,8 +137,7 @@ python3 -m mb status        # lists differences between the machine and state/
 python3 -m mb capture       # rewrites state/; refuses and names any file the secret scanner flags
 python3 -m mb scan          # must say clean
 ```
-Expected: `capture` exits 1 and prints "NOT SAFE: no git remote" for this project until it is pushed (4.5). That message is about
-the repository, not about the capture. Anything else non-zero: read the message; a refused file is named, never printed.
+Expected: exit 0. Exit 1 means a file was refused or a repository in `~/dev` has no remote ("NOT SAFE: no git remote"); the message names it. Anything else non-zero: read the message; a refused file is named, never printed.
 
 ### 4.2 Save the keys (only Giovanni can do this)
 Plug in the SSD, make sure `rclone listremotes` shows `gdrive:`, then:
@@ -145,7 +152,7 @@ python3 -m mb secrets-backup
 - `UPLOAD FAILED: gdrive:machine-bootstrap` means the SSD copy exists but Drive does not. See section 9 (rclone client id).
 - **Write the passphrase on paper and keep it away from the laptop and the SSD.** Without it the archive is unrecoverable.
   This includes the QuizApp release signing key; losing it means the app can never be updated in place.
-- Test that you remember it (changes nothing): `gpg --decrypt <archive> | tar -t | head` and type the passphrase;
+- Test that you remember it (changes nothing): `gpg --decrypt FULL_PATH_OF_THE_ARCHIVE | tar -t | head` (the real command is at the top of this manual) and type the passphrase;
   you should see a list of file names such as `.ssh/id_ed25519.pub`. (Printing names is fine; never print contents.)
 
 ### 4.3 Save the personal files
@@ -164,12 +171,12 @@ cd ~/dev
 for d in */; do d=${d%/}; [ -d "$d/.git" ] || { echo "$d: not a git repo (NOT backed up)"; continue; }
   echo "$d | remote: $(git -C $d remote get-url origin 2>/dev/null || echo NONE) | unpushed: $(git -C $d rev-list --count @{u}..HEAD 2>/dev/null || echo ?) | uncommitted files: $(git -C $d status --short | wc -l)"; done
 ```
-On 2026-10-25 this showed: `machine-bootstrap` has no remote; `wiki` had many uncommitted files; `codex-skills` had uncommitted files;
+On 2026-10-25 this showed (since then `machine-bootstrap` was pushed): `wiki` had many uncommitted files; `codex-skills` had uncommitted files;
 folders such as `wiki-codex-pbar-docs`, `dl`, `android-sdk` are not git repositories (the SDK is re-downloaded by a recipe; check the others).
 Commit and push what matters. Pushing is outward-facing: Giovanni decides, and decides public or private for new repositories.
 
-### 4.5 Put this project on GitHub (so step 5.1 works without the SSD)
-Giovanni decides public or private. If private, the new computer cannot clone it before the SSH key is restored, so use the SSD copy (4.7) for step 5.1.
+### 4.5 Keep this project pushed (so step 5.1 works without the SSD)
+It is a public repository, so `git clone` needs no login. Push every change (`git push`); main only accepts a commit whose CI check `gate` is green.
 After pushing, add the `[github]` section in `pipeline-check.toml` and check that the CI run is green (see `CLAUDE.md`).
 
 ### 4.6 Things the tool cannot save: do these by hand
@@ -181,7 +188,7 @@ After pushing, add the `[github]` section in `pipeline-check.toml` and check tha
 - **Hardware-specific:** monitor layout, printer, Bluetooth pairings.
 
 ### 4.7 Put a copy of this tool on the SSD
-So that the tool is reachable even if GitHub is not (and because it is not on GitHub yet):
+So that the tool is reachable even if GitHub is not (GitHub can be down or unreachable):
 ```bash
 SSD=$(findmnt -n -o TARGET -S UUID=0a34cf43-b7a8-4198-bb85-690e4c0149c4)
 mkdir -p "$SSD/machine-bootstrap/tool"
@@ -194,7 +201,7 @@ Repeat after every `capture`. It contains no secrets (the gate scans `state/`).
 - [ ] `mb secrets-backup` done **after the last change of any key or login**, "written and verified" and "uploaded and compared" both seen
 - [ ] passphrase on paper, in a place that survives the laptop
 - [ ] `mb data-backup --verify` reports no differences
-- [ ] every repository pushed (4.4) and this project either on GitHub or copied to the SSD (4.7)
+- [ ] every repository pushed (4.4) and this project pushed to GitHub and copied to the SSD (4.7)
 - [ ] this manual copied to the SSD (it travels inside `tool/docs/MANUAL.md`) and, if you want, printed
 - [ ] the list in 4.6 handled
 
@@ -452,20 +459,20 @@ Gradle, Android SDK, wiki build; systemd units and linger; a secrets round trip 
 
 **Not proven**
 - Cloning `codex-pbar` and `project-template` (private repositories): needs the real SSH key.
-- The real archive with the real passphrase: needs Giovanni. Until `secrets-backup` has been run once, **no archive exists at all.**
+- The real archive with the real passphrase: needs Giovanni. `secrets-backup` was run on 2026-10-26 (`mb-secrets-20261026-081552.tar.gpg` on the SSD); whether it decrypts with the passphrase from a cold start has not been tested by an assistant. Test it (4.2).
 - Restore onto physical hardware (a VM has no Nvidia card, no KDE session of yours, no real SSD).
 - Starting the wiki service and the public Tailscale address on a new machine.
 - Rebuilding the wiki and its public address after the machine name changes.
 
 **Not covered**
 - Browser profiles (Chrome sync does it), game installs, the phone's own settings, Bluetooth/printer pairings.
-- Repositories or folders that are not on GitHub: `machine-bootstrap` itself until pushed, `wiki-codex-pbar-docs`, `dl`, uncommitted work anywhere (4.4).
+- Repositories or folders that are not on GitHub: `wiki-codex-pbar-docs`, `dl`, uncommitted work anywhere (4.4).
 - Packages that exist only on this laptop: `vesktop`, `utility-birdid`, `umu-launcher-git-dummy-builddeps`, `claude-desktop` (skipped with a message).
 - `openssh-server` is in the manual list and will be installed; if you do not want a server on the new machine, remove it afterwards (`sudo apt-get remove openssh-server`) and do not re-capture it.
 - ARM computers.
 
 **Known risks**
-- The rclone Google Drive remote uses a shared client id that rclone says stops working during 2026.
+- The rclone Google Drive remote used a shared client id that rclone said stops working during 2026. A personal Google OAuth application (the identity rclone uses to talk to Drive) has since been set up; `docs/PRIVACY.md` is its privacy notice. I have not tested an upload with it, and I did not read the rclone configuration (it is secret). Test with `rclone about gdrive:`.
 - Recipe download addresses rot; only the VM test finds this.
 - The passphrase lives only in Giovanni's memory and on paper.
 

@@ -3,6 +3,7 @@ dev/QuizWeb	git@github.com:yujideluca/german-quiz-web.git
 dev/codex-pbar	git@github.com:yujideluca/codex-pbar.git
 dev/codex-skills	git@github.com:yujideluca/codex-skills.git
 dev/german-quiz-releases	git@github.com:yujideluca/german-quiz-releases.git
+dev/machine-bootstrap	git@github.com:yujideluca/machine-bootstrap.git
 dev/pipeline-check	git@github.com:yujideluca/pipeline-check.git
 dev/processing-sketches	git@github.com:yujideluca/processing-sketches.git
 dev/project-template	git@github.com:yujideluca/project-template.git
