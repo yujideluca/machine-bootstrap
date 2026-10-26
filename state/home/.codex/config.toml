@@ -90,8 +90,36 @@ ANDROID_HOME = "/home/yuji/dev/android-sdk"
 [projects."/home/yuji"]
 trust_level = "trusted"
 
+[projects."/tmp/claude-1000/-home-yuji-assistant/deef10af-3213-5ff3-aa9d-be88beea5799/scratchpad/audition/work/footer"]
+trust_level = "trusted"
+
+[projects."/tmp/claude-1000/-home-yuji-assistant/deef10af-3213-5ff3-aa9d-be88beea5799/scratchpad/audition/work/tui_cold"]
+trust_level = "trusted"
+
+[projects."/tmp/claude-1000/-home-yuji-assistant/deef10af-3213-5ff3-aa9d-be88beea5799/scratchpad/audition2/work/gitstate"]
+trust_level = "trusted"
+
+[projects."/tmp/claude-1000/-home-yuji-assistant/deef10af-3213-5ff3-aa9d-be88beea5799/scratchpad/audition2/work/gitstate_b"]
+trust_level = "trusted"
+
+[projects."/tmp/claude-1000/-home-yuji-assistant/deef10af-3213-5ff3-aa9d-be88beea5799/scratchpad/audition2/work/wikiclone"]
+trust_level = "trusted"
+
+[projects."/tmp/claude-1000/-home-yuji-assistant/deef10af-3213-5ff3-aa9d-be88beea5799/scratchpad/audition2/work/revproj"]
+trust_level = "trusted"
+
+[projects."/home/yuji/dev/wiki"]
+trust_level = "trusted"
+
+[projects."/home/yuji/assistant"]
+trust_level = "trusted"
+
+[projects."/home/yuji/.config/Claude/scratch-workspaces/f8ff15eb-d16c-48b7-a094-0145a5378968/7f0f862f-3ccb-481b-96de-32a2a5870399/scratch-2026-10-10-4bbe95"]
+trust_level = "trusted"
+
 [tui]
-status_line = ["task-progress"]
+fullscreen_transcript = true
+status_line = ["five-hour-limit", "weekly-limit", "used-tokens", "context-window-size", "task-progress"]
 screen_reader_detection_done = true
 
 [tui.model_availability_nux]
