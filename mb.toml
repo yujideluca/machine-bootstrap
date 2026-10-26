@@ -22,7 +22,7 @@ home_files = [
   ".local/share/user-places.xbel",
   # Giovanni's own scripts (not the downloaded binaries next to them)
   ".local/bin/claude-assistant", ".local/bin/tg-send", ".local/bin/codex-pbar", ".local/bin/kotlin-lsp",
-  ".local/bin/pyright", ".local/bin/pyright-langserver",
+  ".local/bin/pyright", ".local/bin/pyright-langserver", ".local/bin/codex-remote-tmux",
   # Claude Code and Codex: instructions, settings, skills, the auto-memory
   ".claude/CLAUDE.md", ".claude/settings.json", ".codex/AGENTS.md", ".codex/config.toml",
 ]

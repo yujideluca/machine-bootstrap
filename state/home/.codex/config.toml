@@ -111,6 +111,12 @@ trust_level = "trusted"
 [projects."/home/yuji/dev/wiki"]
 trust_level = "trusted"
 
+[projects."/home/yuji/assistant"]
+trust_level = "trusted"
+
+[projects."/home/yuji/.config/Claude/scratch-workspaces/f8ff15eb-d16c-48b7-a094-0145a5378968/7f0f862f-3ccb-481b-96de-32a2a5870399/scratch-2026-10-10-4bbe95"]
+trust_level = "trusted"
+
 [tui]
 fullscreen_transcript = true
 status_line = ["five-hour-limit", "weekly-limit", "used-tokens", "context-window-size", "task-progress"]

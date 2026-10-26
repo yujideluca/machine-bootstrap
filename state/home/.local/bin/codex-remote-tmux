@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin"
+case "${1:-attach}" in
+ run)
+  umask 077
+  cd "$HOME"
+  while :; do
+   codex remote-control --no-daemon || true
+   echo "Codex remote control exited; retrying in 15 seconds."
+   sleep 15
+  done ;;
+ start)
+  tmux -L codex-remote has-session -t remote 2>/dev/null && exit 0
+  exec tmux -L codex-remote new-session -d -s remote -c "$HOME" "$HOME/.local/bin/codex-remote-tmux run" ;;
+ attach) exec tmux -L codex-remote attach-session -t remote ;;
+ stop) tmux -L codex-remote kill-session -t remote 2>/dev/null || true ;;
+ *) echo "usage: codex-remote-tmux [start|attach|stop|run]"; exit 2 ;;
+esac
