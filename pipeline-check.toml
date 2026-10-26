@@ -24,7 +24,10 @@ id = "gate-segundos"                # a slow gate gets skipped
 kind = "gate_seconds"
 limit = 1200
 
-# [github] is added when the repository exists on GitHub (it does not yet: Giovanni decides when to push)
+[github]
+repo = "yujideluca/machine-bootstrap"
+branch = "main"
+required_check = "gate"
 
 [dora]
 days = 30
