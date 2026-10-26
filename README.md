@@ -27,3 +27,5 @@ On a fresh install: `git clone`, then `./bootstrap.sh`. **Read `docs/RESTORE.md`
 | `tools/vm-test.sh` | proof on a clean virtual machine (about an hour) |
 
 Python standard library only, plus Bash and the tools already on a fresh Ubuntu (`git`, `gpg`, `rsync`, `rclone`).
+
+The personal Google Drive backup connection uses rclone. Its OAuth application is described in [the privacy notice](docs/PRIVACY.md).
