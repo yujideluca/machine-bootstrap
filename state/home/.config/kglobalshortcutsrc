@@ -283,6 +283,8 @@ NewTab=Meta+Return
 _launch=Alt+F2\tMeta+S
 
 [services][org.kde.spectacle.desktop]
+CurrentMonitorScreenShot=
+OpenWithoutScreenshot=
 RecordWindow=
 RectangularRegionScreenShot=Meta+Shift+Print\tMeta+Shift+S
 _launch=Print\t

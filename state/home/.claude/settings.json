@@ -1,11 +1,72 @@
 {
   "env": {
-    "MOBILEMCP_DISABLE_TELEMETRY": "1",
-    "ANDROID_HOME": "/home/yuji/dev/android-sdk"
+    "ANDROID_HOME": "/home/yuji/dev/android-sdk",
+    "MOBILEMCP_DISABLE_TELEMETRY": "1"
   },
-  "permissions": {},
-  "model": "sonnet",
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "opus",
+  "skillOverrides": {
+    "anthropic-skills:alemao-goethe-fsp": "off",
+    "anthropic-skills:analise-artigo-cientifico": "off",
+    "anthropic-skills:bias-risk-triage": "off",
+    "anthropic-skills:browser-automacao-segura": "off",
+    "anthropic-skills:candidatura-alemanha": "off",
+    "anthropic-skills:click-protocol": "off",
+    "anthropic-skills:consulta-clinica": "off",
+    "anthropic-skills:ligamagic-listas": "off",
+    "anthropic-skills:ligamagic-replicar-carrinho-nas-lojas": "off",
+    "anthropic-skills:minimize-site-approvals": "off",
+    "anthropic-skills:regras-magic": "off",
+    "anthropic-skills:reparo-kubuntu": "off",
+    "anthropic-skills:skill-forge": "off"
+  },
   "hooks": {
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/home/yuji/.local/bin/status-quo' hook claude PermissionRequest",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/home/yuji/.local/bin/status-quo' hook claude PostToolUse",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/home/yuji/.local/bin/status-quo' hook claude PreToolUse",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/home/yuji/.local/bin/status-quo' hook claude SessionEnd",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [
@@ -15,15 +76,13 @@
             "timeout": 40
           }
         ]
-      }
-    ],
-    "UserPromptSubmit": [
+      },
       {
         "hooks": [
           {
             "type": "command",
-            "command": "python3 /home/yuji/dev/workflow-memory/bin/mem hook-prompt",
-            "timeout": 10
+            "command": "'/home/yuji/.local/bin/status-quo' hook claude SessionStart",
+            "timeout": 3
           }
         ]
       }
@@ -46,6 +105,57 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/home/yuji/.local/bin/status-quo' hook claude Stop",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/home/yuji/.local/bin/status-quo' hook claude SubagentStart",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/home/yuji/.local/bin/status-quo' hook claude SubagentStop",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/yuji/dev/workflow-memory/bin/mem hook-prompt",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/home/yuji/.local/bin/status-quo' hook claude UserPromptSubmit",
+            "timeout": 3
+          }
+        ]
       }
     ]
   },
@@ -55,15 +165,16 @@
     "refreshInterval": 1
   },
   "enabledPlugins": {
-    "pyright-lsp@claude-plugins-official": true,
+    "android-test-pilot@android-test-pilot": true,
+    "claude-code-setup@claude-plugins-official": false,
+    "claude-md-management@claude-plugins-official": false,
+    "feature-dev@claude-plugins-official": false,
     "kotlin-lsp@claude-plugins-official": true,
-    "session-report@claude-plugins-official": true,
-    "claude-md-management@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": false,
+    "pyright-lsp@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "pr-review-toolkit@claude-plugins-official": true,
-    "claude-code-setup@claude-plugins-official": true,
-    "android-test-pilot@android-test-pilot": true
+    "session-report@claude-plugins-official": false,
+    "rust-analyzer-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "android-test-pilot": {
@@ -74,8 +185,13 @@
     }
   },
   "theme": "dark",
+  "switchModelsOnFlag": true,
   "agentPushNotifEnabled": true,
   "autoMode": {
+    "soft_deny": [
+      "$defaults",
+      "Bash(systemctl stop:*) — observed frequent systemctl/journalctl usage on this personal laptop; disruptive service-state changes should stay soft-blocked for confirmation"
+    ],
     "environment": [
       "### Org-wide",
       "**Organization**: None configured",
@@ -97,10 +213,21 @@
       "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
       "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
       "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "**Repository visibility**: Not queryable here — no git remotes configured in this repo (/home/yuji, 0 tracked files); assume private until a remote is added",
+      "**Default / protected branches**: Not queryable here — no remote, default branch unknown (origin/HEAD unset)",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine (Giovanni's laptop per ~/.claude/CLAUDE.md) with open internet",
+      "**Source control**: The trusted repo and its remote(s) only — this repo currently has no remotes configured",
+      "**Trusted cloud buckets**: None configured — bucket config scan did not complete cleanly, evidence unavailable not absent",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar — note: ~/.claude/CLAUDE.md instructs never to put clinical, secret or contact data about other people in memory (~/dev/workflow-memory)",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries 'prod' or 'production' as a whole word or name segment",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries 'prod' or 'production' as a whole word or name segment",
       "### User-specific",
       "**Primary use of Claude Code**: mixed — software development (llama.cpp tooling, QuizApp) and personal/hobby system administration tasks on Giovanni's laptop",
       "**Trusted repo**: No git repository detected at /home/yuji (the agent's working directory has no remotes and 0 tracked files); treat as untrusted until a repo is identified",
-      "**Org-specific CLIs**: None configured"
+      "**Org-specific CLIs**: None configured",
+      "**Trusted repo**: The git repository the agent started in (/home/yuji) and its configured remote(s) — currently no remotes are configured, so there is no corroborated remote to trust yet",
+      "**Org-specific CLIs**: None configured — observed non-standard CLIs (mem, systemctl, journalctl, tailscale, getfacl, nvidia-smi, etc.) appear to be personal/system-admin tooling, not org-specific",
+      "routine under ~/dev/workflow-memory/ and ~/dev/wiki/ prefixes for mem/wiki commands per ~/.claude/CLAUDE.md"
     ]
   }
 }

@@ -1,0 +1,9 @@
+# Status Quo managed user service
+[Unit]
+Description=Status Quo collector
+After=graphical-session.target
+[Service]
+ExecStart="/home/yuji/.local/bin/status-quo" collect
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=150

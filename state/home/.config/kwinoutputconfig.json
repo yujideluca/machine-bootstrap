@@ -34,7 +34,7 @@
                     "width": 1920
                 },
                 "overscan": 0,
-                "rgbRange": "Automatic",
+                "rgbRange": "Limited",
                 "scale": 1,
                 "sdrBrightness": 200,
                 "sdrGamutWideness": 0,

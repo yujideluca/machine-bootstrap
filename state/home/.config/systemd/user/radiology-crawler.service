@@ -1,0 +1,14 @@
+[Unit]
+Description=Radiology Report Matcher crawler: sitemap, download, extract, and live progress for the plan site (crawl.py run)
+
+[Service]
+WorkingDirectory=/home/yuji/dev/radiology-crawler
+ExecStart=/usr/bin/python3 -I crawl.py run
+# Exit 0 = nothing left to fetch or extract: stay stopped. Exit 1 = pages left (offline, errors): try again later.
+# Exit 75 = the site blocked us repeatedly: never restart by itself.
+Restart=on-failure
+RestartSec=600
+RestartPreventExitStatus=75
+
+[Install]
+WantedBy=default.target

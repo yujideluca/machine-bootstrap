@@ -1,5 +1,6 @@
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
+service_tier = "default"
 
 [desktop]
 followUpQueueMode = "steer"
@@ -7,6 +8,7 @@ external-agent-import-sync-item-types = "all"
 external-agent-import-sync-enabled = true
 conversationDetailMode = "STEPS_COMMANDS"
 ambient-suggestions-enabled = true
+keepRemoteControlAwakeWhilePluggedIn = true
 
 [marketplaces.openai-bundled]
 source_type = "local"
@@ -19,6 +21,10 @@ source = "https://github.com/panicgit/android-test-pilot.git"
 [marketplaces.claude-plugins-official]
 source_type = "git"
 source = "https://github.com/anthropics/claude-plugins-official.git"
+
+[marketplaces.openai-primary-runtime]
+source_type = "local"
+source = "/home/yuji/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [plugins."codex-app-tools@openai-bundled"]
 enabled = true
@@ -57,6 +63,21 @@ enabled = true
 enabled = true
 
 [plugins."chrome@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
 enabled = true
 
 [mcp_servers.node_repl]
@@ -117,6 +138,15 @@ trust_level = "trusted"
 [projects."/home/yuji/.config/Claude/scratch-workspaces/f8ff15eb-d16c-48b7-a094-0145a5378968/7f0f862f-3ccb-481b-96de-32a2a5870399/scratch-2026-10-10-4bbe95"]
 trust_level = "trusted"
 
+[projects."/home/yuji/dev/workflow-memory"]
+trust_level = "trusted"
+
+[projects."/home/yuji/dev/status-quo"]
+trust_level = "trusted"
+
+[projects."/home/yuji/dev/radiology-crawler"]
+trust_level = "trusted"
+
 [tui]
 fullscreen_transcript = true
 status_line = ["five-hour-limit", "weekly-limit", "used-tokens", "context-window-size", "task-progress"]
@@ -128,44 +158,71 @@ screen_reader_detection_done = true
 [hooks.state]
 
 [hooks.state."/home/yuji/.codex/hooks.json:session_start:0:0"]
-trusted_hash = "sha256:e0b0c582942aec11d7a1cec94a7fd0f2bb441f09a4eb7782b043f2ee2a389c56"
+trusted_hash = "sha256:a9ca085a701eae0b03e3b0133a95a7abc13315c2311b425b1775f85bc078b29e"
 
 [hooks.state."/home/yuji/.codex/hooks.json:user_prompt_submit:0:0"]
-trusted_hash = "sha256:3dcfd1f83ce6393d08845f7b4213589c6222348fc1d0706eff73af1ac7f29bd9"
+trusted_hash = "sha256:d12ed5f954600074bc3c22975c31e3b06dc9b67f30bc870898866ea8f74f2335"
 
 [hooks.state."/home/yuji/.codex/hooks.json:stop:0:0"]
-trusted_hash = "sha256:e81762e1ef197d01be9cf37614a18201f1bd48a29f336c8266cbcc7f5f7c8080"
+trusted_hash = "sha256:059a72af117de57ca4d717872abf384dc587d8420175f1a3b3b4cc7226faf368"
 
 [hooks.state."/home/yuji/.codex/hooks.json:stop:1:0"]
 trusted_hash = "sha256:afc7af77fabc0129357b2a0bd721d0a6f287d62e8bbc99dc67049ce9fd2937a6"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:0:0"]
 trusted_hash = "sha256:e1f574c07fd492df4de2ceb615c3b0a2a3eca27329bf0929ff9095650c7174bf"
-trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:1:0"]
 trusted_hash = "sha256:ff051adf363232a355758bbc96941b87ab8b38bd47e6c5940b1232827a68b6d6"
-trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:1:1"]
 trusted_hash = "sha256:ff051adf363232a355758bbc96941b87ab8b38bd47e6c5940b1232827a68b6d6"
-trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:1:2"]
 trusted_hash = "sha256:ff051adf363232a355758bbc96941b87ab8b38bd47e6c5940b1232827a68b6d6"
-trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:session_start:0:0"]
 trusted_hash = "sha256:3def3be0b299c29f829ea4b057509c24f3c6f8eede7b8c719bbd4167866d6cf6"
-trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:user_prompt_submit:0:0"]
 trusted_hash = "sha256:c22701bf949e9ffd219867faec1158e0124874e94f3668dab6209fa3acc92dd6"
-trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:stop:0:0"]
 trusted_hash = "sha256:5d8880157e747997146b5eb0443a43909e23fb0203e64ae4895eff5a1b0282fa"
-trusted_content_hash = "sha256:5d03ad89a3296ec2ab5b57a9983721f8769127528422c5db0a8c45a41b9559b7"
+trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
+
+[hooks.state."/home/yuji/.codex/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:4c996ea5bc79bf3382980c94fe8b03e61b1cbfa3d769dbcdf638a13694e04351"
+
+[hooks.state."/home/yuji/.codex/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:2c3b92776ea3e840c68a941f23317e0717f67ac77f1465e11b800cb7e423a938"
+
+[hooks.state."/home/yuji/.codex/hooks.json:post_tool_use:0:0"]
+trusted_hash = "sha256:b39c662b33d470dc58b58a21dc6d37ba0580676fd08cec577a00f522acb95666"
+
+[hooks.state."/home/yuji/.codex/hooks.json:session_start:1:0"]
+trusted_hash = "sha256:f054df41e446136c3d0b4a3612d9146d1f75233e0450ffcadc8def0237ced0ef"
+
+[hooks.state."/home/yuji/.codex/hooks.json:session_end:0:0"]
+trusted_hash = "sha256:491974853b4887429b0dcd74dc03bb8f77988d27857a4d4b5c9c6421bca56e3a"
+
+[hooks.state."/home/yuji/.codex/hooks.json:user_prompt_submit:1:0"]
+trusted_hash = "sha256:f539f373e3023d09edf7b9548929ac542bfa5866c7038b526c71ecea4a2cf062"
+
+[hooks.state."/home/yuji/.codex/hooks.json:subagent_start:0:0"]
+trusted_hash = "sha256:66787d80dccd9e5547285cdbf764a59a418628a65886f5edbdcc58a6142c42c3"
+
+[hooks.state."/home/yuji/.codex/hooks.json:subagent_stop:0:0"]
+trusted_hash = "sha256:d2df4d79acf7b7b7dbe3ffbec40e99f23d8ec21851d45560b958fe6f38a10ce1"
+
+[hooks.state."/home/yuji/.codex/hooks.json:stop:2:0"]
+trusted_hash = "sha256:caccb307f29f11ec04c55f6470eb84c09dc1f0c79afb0a5f95fb3d58504dca0e"
 
 [notice]
 hide_rate_limit_model_nudge = true

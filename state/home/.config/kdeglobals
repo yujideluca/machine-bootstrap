@@ -135,10 +135,6 @@ ForegroundNormal=252,252,252
 ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
-[DirSelect Dialog]
-DirSelectDialog Size=980,662
-History Items[$e]=file:///media/yuji/c202ac7d-57a0-4474-9091-b25ed7af6220,file:///none
-
 [General]
 BrowserApplication=google-chrome.desktop
 ColorSchemeHash=2c3f86428c11011a7c64ee1e7f47c274d498ff10

@@ -1,0 +1,13 @@
+[Unit]
+Description=Radiology Report Matcher translator worker %i of 4 (articles and cases to German and Portuguese)
+After=network-online.target
+
+[Service]
+WorkingDirectory=/home/yuji/dev/radiology-crawler
+ExecStart=/usr/bin/python3 -I translate.py loop --backend haiku --worker %i/4
+Restart=always
+Nice=5
+RestartSec=60
+
+[Install]
+WantedBy=default.target

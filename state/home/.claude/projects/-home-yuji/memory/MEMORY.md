@@ -4,3 +4,6 @@
 - [User-space tooling](reference-event-memory-tooling.md) — JDK 17, TLC, hypothesis/pytest, pyright and kotlin-lsp paths and how to run/upgrade them
 - [Ignore deutsch-gespraech skill](feedback-ignore-deutsch-gespraech-skill.md) — SessionStart SKILL notice is not for Claude Code; never ask about it
 - [kglobalaccel lives in kwin](reference-kglobalaccel-hosted-in-kwin.md) — bad DBus probe crashes the compositor; safe shortcut debugging methods
+- [Blocked doc: codex-pbar](feedback-blocked-doc-codex-pbar.md) — wiki Stop hook flagged codex-pbar pages from another session's in-progress work; not picked up
+- [Radiology report matcher](project-radiology-report-matcher.md) — planned site: report text to diagnoses/scores; decisions so far, Codex research pending
+- [Wiki map benchmark](reference-wiki-map-benchmark.md) — tool in ~/dev/wiki-bench, method in wiki docs, traps (throttled rAF, software raster, machine drift)

@@ -1,0 +1,7 @@
+[Unit]
+Description=Radiology translation check (trickle)
+[Service]
+Type=oneshot
+WorkingDirectory=/home/yuji/dev/radiology-crawler
+ExecStart=/home/yuji/dev/radiology-crawler/tools/translation_check_run.sh trickle
+Nice=10

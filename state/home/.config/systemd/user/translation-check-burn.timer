@@ -1,0 +1,8 @@
+[Unit]
+Description=Translation check burn: last 24 h before the weekly Claude budget renews (Friday 16:38 UTC)
+[Timer]
+OnCalendar=Thu *-*-* 16:38:00 UTC
+OnBootSec=3min
+Persistent=true
+[Install]
+WantedBy=timers.target

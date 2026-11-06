@@ -1,0 +1,7 @@
+[Unit]
+Description=Ask Claude to review scratch folders older than 3 days (relocate or delete)
+[Service]
+Type=oneshot
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=%h/.local/bin/claude-scratch-review
+Nice=10

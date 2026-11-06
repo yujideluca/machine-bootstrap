@@ -1,0 +1,8 @@
+# Status Quo managed desktop entry
+[Desktop Entry]
+Type=Application
+Name=Status Quo
+Comment=Modular AI development desktop widgets
+Exec="/home/yuji/.local/bin/status-quo" login
+Terminal=false
+Categories=Utility;Development;

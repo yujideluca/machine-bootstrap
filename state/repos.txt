@@ -7,6 +7,8 @@ dev/machine-bootstrap	git@github.com:yujideluca/machine-bootstrap.git
 dev/pipeline-check	git@github.com:yujideluca/pipeline-check.git
 dev/processing-sketches	git@github.com:yujideluca/processing-sketches.git
 dev/project-template	git@github.com:yujideluca/project-template.git
+dev/radiology-crawler	git@github.com:yujideluca/radiology-report-matcher.git
 dev/remote-terminal	git@github.com:yujideluca/remote-terminal.git
+dev/status-quo	git@github.com:yujideluca/status-quo.git
 dev/wiki	git@github.com:yujideluca/wiki.git
 dev/workflow-memory	git@github.com:yujideluca/workflow-memory.git

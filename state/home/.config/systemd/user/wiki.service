@@ -13,7 +13,10 @@ Environment=RELEASE_TMP=%t/wiki
 EnvironmentFile=%h/.config/wiki/secret.env
 EnvironmentFile=%h/.config/wiki/oauth.env
 ExecStart=%h/dev/wiki/server/_build/prod/rel/wiki/bin/wiki start
-ExecStop=%h/dev/wiki/server/_build/prod/rel/wiki/bin/wiki stop
+# No ExecStop: the release has no Erlang distribution (RELEASE_DISTRIBUTION=none,
+# rel/env.sh.eex), so "bin/wiki stop" can't RPC into the node to ask it to stop and
+# always exits 1. systemd's own default stop (SIGTERM to the main PID) does the same
+# graceful shutdown the app already handles.
 Restart=always
 RestartSec=5
 

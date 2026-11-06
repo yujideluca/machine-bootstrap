@@ -1,0 +1,11 @@
+[Unit]
+Description=Radiology Report Matcher plan site updater (rewrites progress-data.js every 5 s from the crawler database)
+
+[Service]
+WorkingDirectory=/home/yuji/dev/radiology-crawler
+ExecStart=/usr/bin/python3 -I site_src/build.py watch
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

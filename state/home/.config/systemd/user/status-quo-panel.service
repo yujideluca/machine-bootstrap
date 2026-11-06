@@ -1,0 +1,8 @@
+# Status Quo managed user service
+[Unit]
+Description=Status Quo panel
+After=graphical-session.target
+[Service]
+ExecStart="/home/yuji/.local/bin/status-quo"
+Restart=on-failure
+RestartSec=3
