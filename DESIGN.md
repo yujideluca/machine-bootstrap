@@ -2,7 +2,7 @@
 
 What the system is, how it is built and why. Living document: updated in the same commit as the change.
 
-Last updated: 2026-10-26
+Last updated: 2026-11-06
 
 ## 1. What it is
 
@@ -69,6 +69,7 @@ Newest first. **Type** is the ISO/IEC/IEEE 14764 maintenance category: *correcti
 
 | Date | Type | Decision | Why |
 |---|---|---|---|
+| 2026-11-06 | Adaptive | Add `synced` to `[capture] skip_globs`: `~/.claude/skills/synced/<uuid>/` is no longer captured, and the copy in `state/` is dropped. | Anthropic's cloud skill sync rewrites that folder on its own (32 of the 78 drifted entries that made the weekly `mb-status.service` fail); it is restored by signing in, not from here. The glob matches by name, so any file or folder called `synced` inside a captured folder is skipped too; none exists today. |
 | 2026-10-26 | Adaptive | Publish the personal rclone OAuth privacy notice in `docs/PRIVACY.md`; use this public repository as the application homepage. | Google requires homepage and privacy URLs before enabling production status, which avoids the seven-day authorization lifetime of testing mode. Giovanni authorized the Google policy and full Drive scope; credentials stay private. |
 | 2026-10-26 | Preventive | Require GitHub Actions `gate` on main, including administrators; disallow force pushes and branch deletion. Add GitHub CI and protection checks to `pipeline-check.toml`. | Giovanni added GitHub protection to bootstrap scope; the local report must verify the live settings instead of omitting them. |
 | 2026-10-26 | Corrective | Mark `dev/env.sh` as sourced Bash, quote the home path and separate command assignments from exports; update the live source and its captured copy together. | The first GitHub run found an unknown shell (SC2148) and masked command status (SC2155) in captured `dev/env.sh`. Before the initial commit, the scanner saw only explicitly configured files because its automatic list comes from git. |

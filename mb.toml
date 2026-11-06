@@ -4,7 +4,8 @@
 [capture]
 repos_root = "~/dev"
 max_file_bytes = 1_000_000
-skip_globs = ["*.bak", "*.bak-*", "*.bak.*", "*.pre-*", "*.mb-bak-*", "*.lock", "*.sock", "__pycache__", "*.tbcache", "*.orig"]
+# "synced": ~/.claude/skills/synced/<uuid>/ is filled by Anthropic's cloud skill sync on login; volatile, not restored from here
+skip_globs = ["*.bak", "*.bak-*", "*.bak.*", "*.pre-*", "*.mb-bak-*", "*.lock", "*.sock", "__pycache__", "*.tbcache", "*.orig", "synced"]
 home_files = [
   ".bashrc", ".profile", ".gitconfig", "AGENTS.md", "dev/env.sh",
   ".config/mimeapps.list", ".config/user-dirs.dirs", ".config/gh/config.yml",
