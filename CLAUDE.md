@@ -8,6 +8,7 @@ computer (`bootstrap.sh`, `python3 -m mb ...`). Runs on a bare system, so Python
 
 1. **Requirement, then test, then code**: a behaviour Giovanni states becomes a row in `docs/REQUIREMENTS.md`, then a
    test tagged `REQ <ID>`, then code. Checked by `tools/pipeline-check.sh --traceability` in the gate.
+   An ID is two capital letters, a dash and the next free number (`XX-12`), never a sub-scheme such as `XX-V2-1`; tasks run in parallel each get a block of free numbers reserved by whoever starts them. A tag is `REQ <ID>` as the first word of a comment, docstring or test name. pipeline-check v0.7.0 fails on any other shape (PC-17, PC-18).
 2. **Planning is pure, the system is touched in one place**: `build_plan` only reads (through `Facts`); only `execute` with a
    runner changes anything, and the runner is a required argument. Checked by the tests (they pass a runner that fails the test).
 3. **Nothing secret in git**: capture is an allow-list (`mb.toml`) plus a scanner; the gate runs `python3 -m mb scan` over
