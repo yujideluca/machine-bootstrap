@@ -4,9 +4,12 @@
     "MOBILEMCP_DISABLE_TELEMETRY": "1"
   },
   "permissions": {
+    "allow": [
+      "Bash(git push origin HEAD:main)"
+    ],
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "fable",
   "skillOverrides": {
     "anthropic-skills:alemao-goethe-fsp": "off",
     "anthropic-skills:analise-artigo-cientifico": "off",
@@ -110,6 +113,15 @@
         "hooks": [
           {
             "type": "command",
+            "command": "python3 -I /home/yuji/dev/workflow-memory/scripts/repo_sync.py hook-stop",
+            "timeout": 20
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
             "command": "'/home/yuji/.local/bin/status-quo' hook claude Stop",
             "timeout": 3
           }
@@ -184,6 +196,18 @@
       }
     }
   },
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "autoCompactWindow": 300000
+    },
+    "claude-sonnet-5-5": {
+      "autoCompactWindow": 250000
+    },
+    "claude-fable-5-2": {
+      "autoCompactWindow": 250000
+    }
+  },
+  "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "switchModelsOnFlag": true,
   "agentPushNotifEnabled": true,

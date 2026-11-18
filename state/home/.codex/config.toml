@@ -1,6 +1,8 @@
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 service_tier = "default"
+model = "gpt-6-astra"
+model_reasoning_effort = "ultra"
 
 [desktop]
 followUpQueueMode = "steer"
@@ -78,6 +80,9 @@ enabled = true
 enabled = true
 
 [plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[plugins."rust-analyzer-lsp@claude-plugins-official"]
 enabled = true
 
 [mcp_servers.node_repl]
@@ -171,31 +176,31 @@ trusted_hash = "sha256:afc7af77fabc0129357b2a0bd721d0a6f287d62e8bbc99dc67049ce9f
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:0:0"]
 trusted_hash = "sha256:e1f574c07fd492df4de2ceb615c3b0a2a3eca27329bf0929ff9095650c7174bf"
-trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
+trusted_content_hash = "sha256:a53e4935e956c2e5037359b33de0e553caf4997677eca1bc44c500e81281f3b6"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:1:0"]
 trusted_hash = "sha256:ff051adf363232a355758bbc96941b87ab8b38bd47e6c5940b1232827a68b6d6"
-trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
+trusted_content_hash = "sha256:a53e4935e956c2e5037359b33de0e553caf4997677eca1bc44c500e81281f3b6"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:1:1"]
 trusted_hash = "sha256:ff051adf363232a355758bbc96941b87ab8b38bd47e6c5940b1232827a68b6d6"
-trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
+trusted_content_hash = "sha256:a53e4935e956c2e5037359b33de0e553caf4997677eca1bc44c500e81281f3b6"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:1:2"]
 trusted_hash = "sha256:ff051adf363232a355758bbc96941b87ab8b38bd47e6c5940b1232827a68b6d6"
-trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
+trusted_content_hash = "sha256:a53e4935e956c2e5037359b33de0e553caf4997677eca1bc44c500e81281f3b6"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:session_start:0:0"]
 trusted_hash = "sha256:3def3be0b299c29f829ea4b057509c24f3c6f8eede7b8c719bbd4167866d6cf6"
-trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
+trusted_content_hash = "sha256:a53e4935e956c2e5037359b33de0e553caf4997677eca1bc44c500e81281f3b6"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:user_prompt_submit:0:0"]
 trusted_hash = "sha256:c22701bf949e9ffd219867faec1158e0124874e94f3668dab6209fa3acc92dd6"
-trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
+trusted_content_hash = "sha256:a53e4935e956c2e5037359b33de0e553caf4997677eca1bc44c500e81281f3b6"
 
 [hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:stop:0:0"]
 trusted_hash = "sha256:5d8880157e747997146b5eb0443a43909e23fb0203e64ae4895eff5a1b0282fa"
-trusted_content_hash = "sha256:208b02ebbd96f2a0a8a75d1be4d5dfc621d3231cfca0a6dbbe6e42762c20b7e8"
+trusted_content_hash = "sha256:a53e4935e956c2e5037359b33de0e553caf4997677eca1bc44c500e81281f3b6"
 
 [hooks.state."/home/yuji/.codex/hooks.json:pre_tool_use:0:0"]
 trusted_hash = "sha256:4c996ea5bc79bf3382980c94fe8b03e61b1cbfa3d769dbcdf638a13694e04351"
@@ -223,6 +228,14 @@ trusted_hash = "sha256:d2df4d79acf7b7b7dbe3ffbec40e99f23d8ec21851d45560b958fe6f3
 
 [hooks.state."/home/yuji/.codex/hooks.json:stop:2:0"]
 trusted_hash = "sha256:caccb307f29f11ec04c55f6470eb84c09dc1f0c79afb0a5f95fb3d58504dca0e"
+
+[hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:2:0"]
+trusted_hash = "sha256:3c4ccf11441e3b148ff79f7c48dac5b69770424df40c34b0af0b30b2ca876e13"
+trusted_content_hash = "sha256:a53e4935e956c2e5037359b33de0e553caf4997677eca1bc44c500e81281f3b6"
+
+[hooks.state."security-guidance@claude-plugins-official:hooks/hooks.json:post_tool_use:2:1"]
+trusted_hash = "sha256:3c4ccf11441e3b148ff79f7c48dac5b69770424df40c34b0af0b30b2ca876e13"
+trusted_content_hash = "sha256:a53e4935e956c2e5037359b33de0e553caf4997677eca1bc44c500e81281f3b6"
 
 [notice]
 hide_rate_limit_model_nudge = true

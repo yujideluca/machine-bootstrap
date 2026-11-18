@@ -1,6 +1,6 @@
 ---
 name: "reparo-kubuntu"
-description: "Diagnostica e corrige problemas do notebook Acer Nitro do Giovanni (Kubuntu 24.04, Plasma 5.27, X11, Nvidia) e torna as correções permanentes entre reinicializações."
+description: "Diagnostica e corrige problemas do notebook Acer Nitro do Giovanni (Kubuntu 26.04, Plasma 6, Wayland, Nvidia; confira com lsb_release/plasmashell --version) e torna as correções permanentes entre reinicializações."
 ---
 
 
@@ -31,8 +31,8 @@ Pergunte só o que o log não responde: o que mudou (update, config, tema) e se 
 |---|---|---|
 | tela preta / sem painel / plasmashell ou krunner cai | crash do plasmashell (fontconfig `FcCharSetHasChar`, tema ausente) | `coredumpctl info plasmashell`; `systemctl --user restart plasma-plasmashell` |
 | crash em libfontconfig | cache de fontes corrompido / fonte web (woff) mal casada | `fc-cache -r -v`; `fc-match sans` |
-| letras acentuadas maiúsculas / teclado estranho | Fcitx + layout/modelo (`pc104alt`, `br`) | `fcitx5-diagnose`; `setxkbmap -query` |
-| touchpad sem configuração | módulo/driver (libinput × synaptics, receptor XCTECH) | `xinput list`; `journalctl -k \| grep -i touch` |
+| letras acentuadas maiúsculas / teclado estranho | Fcitx + layout/modelo (`pc104alt`, `br`) | `fcitx5-diagnose`; `grep -A3 Layout ~/.config/kxkbrc` (no Wayland `setxkbmap -query` não reflete o layout real) |
+| touchpad sem configuração | módulo/driver (libinput × synaptics, receptor XCTECH) | `libinput list-devices` (sudo); `journalctl -k \| grep -i touch` (`xinput` só vê dispositivos XWayland) |
 | boot lento | `NetworkManager-wait-online`, fstab | `systemd-analyze blame \| head`; `systemd-analyze critical-chain` |
 | flicker / tela | driver Nvidia × kernel | `ubuntu-drivers devices`; `dkms status` |
 

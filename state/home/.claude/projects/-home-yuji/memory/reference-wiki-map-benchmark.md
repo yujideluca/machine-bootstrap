@@ -37,3 +37,8 @@ Best so far: `~/dev/wiki-globe-sandbox/variants/v6` (spring state on one array, 
 discs; hover frozen during drags) on top of v2 + `will-change` rule: pan frame time -42 %, sweep -14 %, springs ~6x cheaper; zoom raster +60-75 %
 unexplained. Lines as paths and keyed children gave no frame-time gain (not adopted). Not applied to ~/dev/wiki (uncommitted DY-8 work there; ask Giovanni).
 Same data folder for all compared builds or layouts differ. Details: RESULTS.md rounds 6-7.
+
+## Profile cleanup (2026-11-06)
+`map_bench.launch()` returns a `Chrome` (Popen subclass): `terminate()` stops Chrome and deletes its fresh user-data profile
+(also via atexit and when Chrome fails to start). Callers must keep using `proc.terminate()` in `finally`. Before this, 288
+leftover `bench-profile-*` dirs filled 17 GB. ~/dev/wiki-globe-sandbox is still in use and cited by wiki ADR-0010: do not archive it.

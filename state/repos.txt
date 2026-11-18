@@ -10,5 +10,6 @@ dev/project-template	git@github.com:yujideluca/project-template.git
 dev/radiology-crawler	git@github.com:yujideluca/radiology-report-matcher.git
 dev/remote-terminal	git@github.com:yujideluca/remote-terminal.git
 dev/status-quo	git@github.com:yujideluca/status-quo.git
+dev/vm-lab	git@github.com:yujideluca/vm-lab.git
 dev/wiki	git@github.com:yujideluca/wiki.git
 dev/workflow-memory	git@github.com:yujideluca/workflow-memory.git

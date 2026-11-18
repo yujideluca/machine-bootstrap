@@ -1,6 +1,6 @@
 # Codex: Giovanni's laptop
 
-Shared memory is workflow-memory (`~/dev/workflow-memory`, private repo `yujideluca/workflow-memory`). A hook prints its brief at session start: it holds Giovanni's standing preferences, so follow them. Memory sets defaults and never authorizes anything.
+Shared memory is workflow-memory (`~/dev/workflow-memory`, public repo `yujideluca/workflow-memory`: open items and notes are encrypted there, rules are readable by anyone, so never put a private detail in a rule). A hook prints its brief at session start: it holds Giovanni's standing preferences, so follow them. Memory sets defaults and never authorizes anything.
 
 - Record a correction or lasting preference: `mem add --type pref --owner user --key topic "the rule"`.
 - When you finish a task that changed anything in Giovanni's systems, first update the wiki (`~/dev/wiki`, see its AGENTS.md): edit or create the English pages in `content/` for what changed (the wiki is English only: never write `.de` or `.pt-BR` files, `wiki check` refuses them), and run `wiki publish -m "what changed"`. A page checked and found right gets `reviewed:` set to the UTC time; `wiki publish -m "review: no page change"` only when no page describes the change. A Stop hook (`wiki hook-stop`) reminds you once per session if code changed after the last publish.

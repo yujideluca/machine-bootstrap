@@ -2,7 +2,7 @@
 
 What the system is, how it is built and why. Living document: updated in the same commit as the change.
 
-Last updated: 2026-11-06
+Last updated: 2026-11-18
 
 ## 1. What it is
 
@@ -69,6 +69,7 @@ Newest first. **Type** is the ISO/IEC/IEEE 14764 maintenance category: *correcti
 
 | Date | Type | Decision | Why |
 |---|---|---|---|
+| 2026-11-18 | Corrective | Add `.trash` to `[capture] skip_globs`: `~/.claude/skills/.trash/` is not captured. `state/` refreshed the same day, except `gwenviewrc`, `okularrc` and `spectaclerc`, which stay at the capture of 2026-11-06. | The app's skill sync moves a skill removed in the app into that folder; it is not part of the setup. The three settings files carry lists of recently opened files, and this repository is public: no new names are added until capture leaves such lists out. |
 | 2026-11-06 | Adaptive | Add `synced` to `[capture] skip_globs`: `~/.claude/skills/synced/<uuid>/` is no longer captured, and the copy in `state/` is dropped. | Anthropic's cloud skill sync rewrites that folder on its own (32 of the 78 drifted entries that made the weekly `mb-status.service` fail); it is restored by signing in, not from here. The glob matches by name, so any file or folder called `synced` inside a captured folder is skipped too; none exists today. |
 | 2026-10-26 | Adaptive | Publish the personal rclone OAuth privacy notice in `docs/PRIVACY.md`; use this public repository as the application homepage. | Google requires homepage and privacy URLs before enabling production status, which avoids the seven-day authorization lifetime of testing mode. Giovanni authorized the Google policy and full Drive scope; credentials stay private. |
 | 2026-10-26 | Preventive | Require GitHub Actions `gate` on main, including administrators; disallow force pushes and branch deletion. Add GitHub CI and protection checks to `pipeline-check.toml`. | Giovanni added GitHub protection to bootstrap scope; the local report must verify the live settings instead of omitting them. |

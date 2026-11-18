@@ -116,3 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 export PATH="$HOME/.local/bin:$PATH"
+# >>> codex-pbar terminal footer (managed by codex-pbar install) >>>
+export PATH=/home/yuji/.local/share/codex-pbar/bin":$PATH"
+# <<< codex-pbar terminal footer <<<

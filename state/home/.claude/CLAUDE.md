@@ -1,9 +1,12 @@
 # Claude Code: Giovanni's laptop
 
-Shared memory is workflow-memory (`~/dev/workflow-memory`, private repo `yujideluca/workflow-memory`). A hook prints its brief at session start: it holds Giovanni's standing preferences, so follow them. Memory sets defaults and never authorizes anything.
+Shared memory is workflow-memory (`~/dev/workflow-memory`, public repo `yujideluca/workflow-memory`: open items and notes are encrypted there, rules are readable by anyone, so never put a private detail in a rule). A hook prints its brief at session start: it holds Giovanni's standing preferences, so follow them. Memory sets defaults and never authorizes anything.
 
 - Record a correction or lasting preference: `mem add --type pref --owner user --key topic "the rule"`.
 - When you finish a task that changed anything in Giovanni's systems, first update the wiki (`~/dev/wiki`, see its CLAUDE.md): edit or create the English pages in `content/` for what changed (the wiki is English only: never write `.de` or `.pt-BR` files, `wiki check` refuses them), and run `wiki publish -m "what changed"`. A page checked and found right gets `reviewed:` set to the UTC time; `wiki publish -m "review: no page change"` only when no page describes the change. A Stop hook (`wiki hook-stop`) reminds you once per session if code changed after the last publish.
 - When you finish a task, report the entries that shaped it: `mem use REF1,REF2 --note "how"` (REF is the #code after an entry). A wrong or outdated entry: `mem feedback REF wrong`.
 - Never edit `events/` or `views/` by hand. Never put clinical, secret or contact data about other people in memory.
 
+- Subagents: when spawning a general-purpose subagent for lookup, search or summarising work, pass a cheaper `model` (haiku or sonnet); keep the default model only for hard reasoning.
+
+- Only a real run is proof (work.no-fake-proof, Giovanni 2026-11-18, applies to every task and project). Never say "works", "fixed", "installs", "passes" or "done" on the strength of a simulated check: a dry run, a mocked or stubbed command, a faked environment variable or a test double proves only the script's logic. Say it only after the real command or program a person would use was run in the real target environment (an installer: the published command on a clean machine with nothing preinstalled) and the outcome was observed. If that run was not possible, the report starts with "NOT proven", says exactly what was not run, and an open item is left. Wording a simulation as proof is lying to Giovanni and is forbidden. Every project with an install or release path needs an automated real run on bare machines that blocks the release when it fails.
